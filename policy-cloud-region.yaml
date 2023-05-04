@@ -1,0 +1,24 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: ConfigurationPolicy
+metadata:
+  name: pacman-policy-config
+  namespace: policies
+spec:
+  namespaceSelector:
+    exclude:
+    - kube-*
+    include:
+    - default
+  object-templates:
+  - complianceType: musthave
+    objectDefinition:
+      kind: ConfigMap
+      apiVersion: v1
+      metadata:
+        name: pacman-app-config
+        namespace: pacman
+      data:
+        cloudprovider: '{{ fromClusterClaim "platform.open-cluster-management.io" }}'
+        zone: '{{ fromClusterClaim "region.open-cluster-management.io" }}'
+  remediationAction: enforce
+  severity: low
