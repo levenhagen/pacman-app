@@ -4,11 +4,6 @@ metadata:
   name: pacman-policy-config
   namespace: policies
 spec:
-  namespaceSelector:
-    exclude:
-    - kube-*
-    include:
-    - default
   object-templates:
   - complianceType: musthave
     objectDefinition:
