@@ -15,18 +15,18 @@ spec:
         kind: ConfigurationPolicy
         metadata:
           name: pacman-policy-config
-          namespace: policies
         spec:
           object-templates:
-          - complianceType: musthave
-            objectDefinition:
-              kind: ConfigMap
-              apiVersion: v1
-              metadata:
-                name: pacman-app-config
-                namespace: pacman
-              data:
-                cloudprovider: '{{ fromClusterClaim "platform.open-cluster-management.io" }}'
-                zone: '{{ fromClusterClaim "region.open-cluster-management.io" }}'
+            - complianceType: musthave
+              objectDefinition:
+                kind: ConfigMap
+                apiVersion: v1
+                metadata:
+                  name: pacman-app-config
+                  namespace: pacman
+                data:
+                  cloudprovider: '{{ fromClusterClaim "platform.open-cluster-management.io" }}'
+                  zone: '{{ fromClusterClaim "region.open-cluster-management.io" }}'
           remediationAction: enforce
           severity: low
+          pruneObjectBehavior: DeleteIfCreated
